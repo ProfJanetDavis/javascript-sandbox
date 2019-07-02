@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>
+    Toggleable Javascript animation
+  </title>
+</head>
 <style>
 #container {
   width: 400px;
   height: 400px;
   position: relative;
-  background: gray;
+  background: "#5F2871";
 }
 #sprite {
   width: 50px;
   height: 50px;
   position: absolute;
-  background-color: blue;
+  background-color: "#BB08F4";
 }
 </style>
 <body>
 
 <p>Adapted from <a href="https://www.w3schools.com/js/tryit.asp?filename=tryjs_dom_animate_3">W3Schools - animate3</a></p>
 
-<p><button id="button" onclick="myMove()">Animate</button></p> 
+<p><button id="button" onclick="animate()">Animate</button></p> 
 
 <div id ="container">
-  <div id ="sprite"></div>
+  <div id ="sprite"/>
 </div>
 
 <script>
-myMove = (function() {
+// This is a closure! See https://www.w3schools.com/js/js_function_closures.asp
+// Why? So that the position and increment do not reset when we stop and restart the animation,
+// AND these variables are not globals.
+animate = (function() {
   var pos=0, inc=1;
   return function() {
     var elem = document.getElementById("sprite");   
@@ -36,7 +44,7 @@ myMove = (function() {
     button.onclick = function() { 
       clearInterval(id); 
       button.innerHTML = "Animate";
-      button.onclick = function() { myMove(); };
+      button.onclick = function() { animate(); };
     };
     function frame() {
       if ((pos >= 350) || (pos < 0)) {
