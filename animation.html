@@ -23,7 +23,9 @@
 
 <p>Adapted from <a href="https://www.w3schools.com/js/tryit.asp?filename=tryjs_dom_animate_3">W3Schools - animate3</a></p>
 
-<p><button id="button" onclick="animate()">Animate</button></p> 
+<p>
+  <button id="button" onclick="myMove()">Go!</button>
+</p>
 
 <div id ="container">
   <div id ="sprite"/>
@@ -33,18 +35,19 @@
 // This is a closure! See https://www.w3schools.com/js/js_function_closures.asp
 // Why? So that the position and increment do not reset when we stop and restart the animation,
 // AND these variables are not globals.
-animate = (function() {
-  var pos=0, inc=1;
+myMove = (function() {
+  var pos=0, inc=1, text="";
   return function() {
     var elem = document.getElementById("sprite");   
     var button = document.getElementById("button");
 
     var id = setInterval(frame, 5);
-    button.innerHTML = "Stop";
+    text = button.innerHTML;
+    button.innerHTML = "Stop!";
     button.onclick = function() { 
       clearInterval(id); 
-      button.innerHTML = "Animate";
-      button.onclick = function() { animate(); };
+      button.innerHTML = text;
+      button.onclick = function() { myMove(); };
     };
     function frame() {
       if ((pos >= 350) || (pos < 0)) {
