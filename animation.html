@@ -47,7 +47,7 @@ myMove = (function() {
     button.onclick = function() { 
       clearInterval(id); 
       button.innerHTML = text;
-      button.onclick = function() { myMove(); };
+      button.onclick = myMove;
     };
     function frame() {
       if ((pos >= 350) || (pos < 0)) {
